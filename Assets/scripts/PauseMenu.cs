@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Pause : MonoBehaviour
+public class PauseMenu : MonoBehaviour
 {
     public bool PauseGame;
     public GameObject pauseGameMenu;
 
-    void Update()
-    {
+    void Update() {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (PauseGame)
@@ -18,29 +17,35 @@ public class Pause : MonoBehaviour
             }
             else
             {
-                Pause1();
+                Pause();
             }
         }
-    }
+     }
 
-    public void Resume()
-    {
+     public void Resume()
+     {
         pauseGameMenu.SetActive(false);
         Time.timeScale = 1f;
         PauseGame = false;
-    }
+     }
 
-    public void Pause1()
-    {
+     public void Pause()
+     {
         pauseGameMenu.SetActive(true);
         Time.timeScale = 0f;
-        PauseGame = true;
-    }
+        PauseGame = false;
+     }
 
-    public void LoadMenu()
-    {
-        Time.timeScale = 0f;
+     public void LoadMenu()
+     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene("Menu");
         Debug.Log("Menu");
-    }
+     }
+
+     public void Settings()
+     {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("SettingsUI");
+     }
 }
