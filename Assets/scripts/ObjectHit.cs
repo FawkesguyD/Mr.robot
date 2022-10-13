@@ -5,16 +5,21 @@ using UnityEngine.SceneManagement;
 
 public class ObjectHit : MonoBehaviour
 {
+
+    [SerializeField] int lives = 10;
 void  OnCollisionEnter(Collision other) {
     
 
     switch (other.gameObject.tag)
     {
         case "Lose":
-        ReloadLevel(); break;
-        case "Dictionary":
+        lives --; Debug.Log(lives); break;
+        case "Finish":
         LoadNextLevel(); break;
     }
+
+    if (lives == 0)
+        ReloadLevel();
 
 }
 
@@ -23,7 +28,7 @@ private void ReloadLevel()
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex);
     }
-void LoadNextLevel()
+private void LoadNextLevel()
 {
     int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
     int nextSceneIndex = currentSceneIndex + 1;
